@@ -8,7 +8,17 @@ from routers.inventory import inventory_router
 from routers.users import users_router
 from routers.auth import authen_router
 
-app = FastAPI()
+app = FastAPI(
+    title="fastapi workshop x flutter 2020",
+    description="",
+    version="0.0.1",
+    terms_of_service="https://www.teamramweb.com/terms/",
+    contact={
+        "name": "Teerasit Arttantra",
+        "url": "https://www.teamramweb.com/contact/",
+        "email": "info@teamtamweb.com",
+    },
+)
 app.include_router(inventory_router.router)
 app.include_router(users_router.router)
 app.include_router(authen_router.router)
