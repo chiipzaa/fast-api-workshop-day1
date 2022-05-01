@@ -77,3 +77,28 @@ Run server
 
 รันจัด format ทั้ง project
 > black .
+
+
+Day 2
+
+เริ่มต้น แก้ไขโปรแกรม
+
+Active env ก่อน
+Mac 
+source env/bin/activate
+Windows
+.\env\Scripts\activate
+
+ติดตั้ง passlib
+>  pip install passlib bcrypt python-multipart
+
+ส่ง lib ใน project
+> pip freeze > requirements.txt
+
+ การติดตั้งในภายหลัง
+> pip install -r requirements.txt
+
+ติดตั้ง JWT
+> pip install python-jose python-decouple
+
+Deploy บน Heroku plattform (Bonus Session)
