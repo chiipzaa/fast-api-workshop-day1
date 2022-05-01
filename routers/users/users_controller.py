@@ -7,11 +7,9 @@ from fastapi.responses import JSONResponse
 from models.users.users_model import UserBase, UserDisplayBase, DbUser
 from utils.hash import Hash
 
+
 def create(db: Session, request: UserBase):
-    new_user = DbUser(
-        username = request.username, 
-        password = Hash.bcrypt(request.password)
-    )
+    new_user = DbUser(username=request.username, password=Hash.bcrypt(request.password))
 
     db.add(new_user)
     db.commit()
@@ -28,6 +26,10 @@ def delete(db: Session, id: int):
 
 def read_users(db: Session):
     return db.query(DbUser).all()
+
+
+def read_user_by_id(db: Session, id: int):
+    return db.query(DbUser).filter(DbUser.id == id).first()
 
 
 def update(db: Session, id: int, request: UserBase):
