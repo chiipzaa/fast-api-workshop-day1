@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, Depends
 
 from sqlalchemy.orm import Session
@@ -10,17 +11,21 @@ from routers.users import users_controller
 
 router = APIRouter(prefix="/users", tags=["users"])
 
-fake_user_db = [
-    {"username": "codewizz"},
-    {"username": "sonny"},
-]
 
-
-@router.get("/")
-def get_all_user():
-    return fake_user_db
+@router.get("/", response_model=List[UserDisplayBase])
+def get_all_user(db: Session = Depends(get_db)):
+    return users_controller.read_users(db)
 
 
 @router.post("/")
 def register_user(request: UserBase, db: Session = Depends(get_db)):
     return users_controller.create(db, request)
+
+@router.put("/{id}")
+def update_user(id: int, request: UserBase, db: Session = Depends(get_db)):
+    return users_controller.update(db, id, request)
+
+
+@router.delete("/{id}")
+def delete_user(id: int, db: Session = Depends(get_db)):
+    return users_controller.delete(db, id)
