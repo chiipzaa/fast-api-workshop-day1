@@ -14,7 +14,6 @@ app.include_router(users_router.router)
 app.include_router(authen_router.router)
 
 
-
 @app.get("/")
 def hello():
     return {"Hello": "FastAPI"}
